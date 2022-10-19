@@ -1,0 +1,267 @@
+header {
+	background-color: white;
+	height: fit-content;
+	max-width: 100%;
+	flex-grow: 1;
+	padding: 11px 37px 9px 24px;
+	@media (max-width: 1010px) {
+		padding-right: 15px;
+	}
+	@media (max-width: 940px) {
+		padding-left: 15px;
+	}
+	@media (max-width: 750px) {
+		padding-left: 5px;
+	}
+	@media (max-width: 675px) {
+		// position: fixed;
+		// top: 0;
+		width: 100%;
+		padding: 5px 37px 5px 0px;
+	}
+}
+
+main {
+	width: 100%;
+}
+
+a {
+	display: grid;
+	place-items: center;
+}
+
+.logo-and-nav, .header-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: center;
+}
+
+.logo-and-nav {
+	flex-grow: 0;
+	& [alt="company logo"] {
+		margin: 0;
+		padding: 0;
+		@media (max-width: 410px) {
+			width: 90px;
+		}
+	}
+}
+
+.button-group {
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	@media (max-width: 675px) {
+		display: none;
+	}
+}
+
+.nav-item {
+	background: #F3F6F9;
+	border-radius: 6px;
+	width: 116px;
+	height: 44px;	
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: calc(21px / 14px * 100%);
+	color: #464E5F;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	transition: all 0.2s;
+	&:hover {
+		transform: scale(1.1);
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.279);
+	}
+	@media (max-width: 940px) {
+		width: 100px;
+	}
+	@media (max-width: 897px) {
+		width: 90px;
+		height: 40px;
+	}
+	@media (max-width: 410px) {
+		width: 90px;
+		height: 37px;
+		&:hover {
+			transform: none;
+			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.167);
+		}
+	}
+	@media (max-width: 355px) {
+		width: 70px;
+		font-size: 12px;
+	}
+}
+
+.first-button {
+	margin-left: 50px;
+	@media (max-width: 1030px) {
+		margin-left: 30px;
+	}
+	@media (max-width: 960px) {
+		margin-left: 15px;
+	}
+}
+
+.second-button {
+	margin-left: 29px;
+	@media (max-width: 960px) {
+		margin-left: 15px;
+	}
+}
+
+.button {
+	width: 96px;
+	height: 35px;
+	border-radius: 12px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 18px / 12px * 100%;
+	color: #FFFFFF;
+	cursor: pointer;
+	transition: all 0.2s;
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.add-button {
+	background-color: #2C9AFF;
+	
+	@media (max-width: 780px) {
+		width: 80px;
+	}
+}
+
+.login-button {
+	background-color: #181C32;
+	margin-left: 70px;
+	@media (max-width: 1010px) {
+		margin-left: 50px;
+	}
+	@media (max-width: 897px) {
+		width: 60px;
+	}
+	@media (max-width: 780px) {
+		margin-left: 30px;
+	}
+}
+
+.register-button {
+	background-color: #F64E60;
+	margin-left: 25px;
+	@media (max-width: 1010px) {
+		margin-left: 15px;
+	}
+	@media (max-width: 897px) {
+		width: 60px;
+	}
+}
+
+// burger-wrapper {
+
+// }
+
+
+.bm-burger-button {
+	position: fixed;
+  	width: 36px;
+  	height: 30px;
+  	right: 25px;
+  	top: 27px;
+	transform: scale(0.9);
+	@media (min-width: 676px) {
+		display: none;
+	}
+	@media (max-width: 675px) {
+		top: 21px;
+	}
+	@media (max-width: 410px) {
+		transform: scale(0.7);
+		&:hover {
+			transform: scale(0.7);
+		}
+		right: 15px;
+  		top: 14px;
+	}
+	
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #2f195a;
+
+
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #2f195a;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  max-width: 200px;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #b1b6cb;
+  padding: 2em 0em 0 0.5em;
+  font-size: 1.15em;
+
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+  font-size: 20px;
+  &:not(:last-child) {
+	margin-bottom: 10px;
+  }
+  font-family: "Poppins", sans-serif;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  	background: rgba(0, 0, 0, 0.408);
+  	width: 1vh;
+  	height: 1vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
