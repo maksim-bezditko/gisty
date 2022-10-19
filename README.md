@@ -1,8 +1,6 @@
-# H1
-My pet-project designed to help you and me keep quotes from books in a separate and secure place.
+# My pet-project designed to help you and me keep quotes from books in a separate and secure place.
 
-## H2
-Technology stack:
+## Technology stack:
 - ReactJS as a core framework
 - react-router-dom to manage SPA routing
 - redux/toolkit along with RTK Query to handle CRUM operations
