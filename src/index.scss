@@ -7,6 +7,16 @@
   text-decoration: none;
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  color: black;
+}
+
+
 body {
   background-color: #D5D9E2;
   font-family: "Poppins", sans-serif;

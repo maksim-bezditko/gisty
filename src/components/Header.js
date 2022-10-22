@@ -1,19 +1,48 @@
 import "./Header.scss";
 import gistyLogo from "../assets/Gisty.png";
-import { slide as Menu } from "react-burger-menu";
 import { NavLink } from 'react-router-dom';
-import { useState, useCallback } from "react";
-// style={{color: currentSection === "books" ? "#8950FC" : "#464E5F"}}
+import { useCallback, useEffect, useState } from "react";
+import { Fade as Hamburger} from "hamburger-react";
+import { CSSTransition } from "react-transition-group";
+
+// Higher-order components to create popups passing trigger argument
+
+import withAddPopup from "./popups/withAddPopup";
+import withRegisterPopup from "./popups/withRegisterPopup";
+import withLoginPopup from './popups/withLoginPopup';
 
 const activeStyle = {
-	backgroundColor: "red"
+	transform: "translateX(0)"
 }
 
 const Header = () => {
+	const [isOpen, setOpen] = useState(false);
 
-	const [isOpen, setIsOpen] = useState(false);
+	const handleClick = () => setOpen(prev => !prev);
 
-	const handleClick = () => setIsOpen(prev => !prev);
+	const checkKeypress = useCallback(event => {
+		if (event.key === "Escape") {
+			setOpen(false)
+		}	
+	}, [])
+
+	useEffect(() => {
+		document.addEventListener("keyup", checkKeypress)
+
+		return () => {
+			document.removeEventListener("keypress", checkKeypress)
+		}
+	})
+	
+	const AddPopup = withAddPopup(<button className="button add-button">Add a book</button>)
+	const AddPopupMenu = withAddPopup(<p className="menu-item margin">Add a book</p>)
+
+	const RegisterPopup = withRegisterPopup(<button className="button register-button">Register</button>)
+	const RegisterPopupMenu = withRegisterPopup(<p className="menu-item">Register</p>)
+
+	const LoginPopup = withLoginPopup(<button className="button login-button">Log in</button>)
+	const LoginPopupMenu = withLoginPopup(<p className="menu-item">Log in</p>)
+	
 
 	return (
 			<header>
@@ -37,63 +66,85 @@ const Header = () => {
 							className="nav-item second-button">
 								My quotes
 						</NavLink>
-						{/* <button className="nav-item second-button" style={{color: currentSection === "quotes" ? "#8950FC" : "#464E5F"}}>Quotes</button> */}
 
 					</div>
-
 					<div className="button-group">
-						<button className="button add-button">Add a book</button>
-						<button className="button login-button">Log in</button>
-						<button className="button register-button">Register</button>
+						<AddPopup/>
+						<LoginPopup/>
+						<RegisterPopup/>
+					</div>
+					
+					<div className="hamburger">
+						<Hamburger size={27} distance="lg" toggled={isOpen} toggle={handleClick} color="#3F4254" />
 					</div>
 
-					<Menu isOpen={isOpen} onOpen={handleClick} onClose={handleClick} right>
-						{/* <a id="log in" href="#">Log in</a>
-						<a id="register" href="#">Register</a> */}
-						<br/>
-						
-						<NavLink 
-							to="/" end 
+					<div 
+						className="menu" 
+						style={{display: isOpen ? "block" : "none"}} 
+						onClick={() => {
+							setOpen(false)
+						}}>
+						<CSSTransition
+							in={isOpen} 
+							timeout={5000} 
+							classNames="slide">
+								<div className="menu-main"
+									style={{transform: "translateX(0)"}}
+									onClick={(e) => {
+										e.stopPropagation()
+										setOpen(true)
+									}}>
 
-							className="menu-item"
+										<AddPopupMenu/>
 
-							style={({ isActive }) =>
-              				isActive ? activeStyle : undefined
-            			}
-							id="books"
-							onClick={handleClick}>
-							My books
-						</NavLink>
-						
-						<NavLink 
-							to="quotes" end 
-							className={({ isActive }) =>
-              				isActive ? activeStyle : undefined
-            			}
-							id="quotes"
-							onClick={handleClick}>
-							My quotes
-						</NavLink>
+										<NavLink 
+											onClick={(e) => {
+												e.stopPropagation()
+												setOpen(false)
+											}}
+											to="/" end 
+											className="menu-item"
+											style={({ isActive }) =>
+												isActive ? activeStyle : undefined
+											}
+											id="books">
+											My books
+										</NavLink>
 
-						<NavLink 
-							onClick={handleClick}
-							to="stats" end 
-							className={({ isActive }) =>
-              				isActive ? activeStyle : undefined
-            			}
-							id="stats">
-							My stats
-						</NavLink>
+										<NavLink 
+											to="quotes" end 
+											className={({ isActive }) =>
+												isActive ? activeStyle : undefined
+											}
+											id="quotes"
+											onClick={(e) => {
+												e.stopPropagation()
+												setOpen(false)
+											}}>
+											My quotes
+										</NavLink>
 
-						{/* <a id="stats" href="/">My stats</a> */}
-						
-						
-						<br/>
-						{/* <a id="addBook" href="#">Add a book</a>
-						<br/>
-						<a id="settings" href="#">Settings</a>
-						<a id="report" href="#">Report a bug</a> */}
-					</Menu>
+										<NavLink 
+											onClick={(e) => {
+												e.stopPropagation()
+												setOpen(false)
+											}}
+											to="stats" end 
+											className={({ isActive }) =>
+												isActive ? activeStyle : undefined
+											}
+											id="stats-menu">
+											My stats
+										</NavLink>
+										<LoginPopupMenu/>
+										<RegisterPopupMenu/>
+								</div>
+						</CSSTransition>
+					</div>
+
+					{/* <div className="popups">
+						{renderPopup("register")}
+					</div> */}
 					
 				</div>
 				

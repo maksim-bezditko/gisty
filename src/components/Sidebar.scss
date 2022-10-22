@@ -8,12 +8,6 @@ aside {
 	align-items: center;
 	padding: 13px 19px 0px 17px;
 	overflow: hidden;
-	& > img {
-		@media (max-width: 750px) {
-			margin-top: 10px;
-			width: 50px;
-		}
-	}
 	@media (max-width: 950px) {
 		width: 75px;
 	}
@@ -32,10 +26,19 @@ aside {
 	cursor: pointer;
 	border-radius: 7px;
 	transition: all 0.5s;
+	@media (max-width: 750px) {
+		margin-bottom: 20px;
+		width: 40px;
+		height: 40px;
+	}
 }
 
 .logo {
 	margin-bottom: 50px;
+	@media (max-width: 750px) {
+		margin-top: 10px;
+		width: 50px;
+	}
 }
 
 .stats {
