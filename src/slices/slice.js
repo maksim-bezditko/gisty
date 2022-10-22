@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	currentSection: "stats"
+	currentSection: "stats",
+	auth: null
 }
 
 
@@ -11,9 +12,12 @@ const slice = createSlice({
 	reducers: {
 		changeSection: (state, action) => {
 			state.currentSection = action.payload;
+		},
+		setAuth: (state, action) => {
+			state.auth = action.payload;
 		}
 	}
 })
 
-export const { changeSection } = slice.actions;
+export const { changeSection, setAuth } = slice.actions;
 export default slice.reducer;

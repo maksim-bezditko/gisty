@@ -29,7 +29,6 @@ const withAddPopup = (trigger)=> () => {
 				validateOnBlur>
 				{({isSubmitting, isValid}) => 
 					<Form className="form">
-				
 						<h1>Wanna add a book?</h1>
 						<div className="group">
 							<label htmlFor="bookUrl">Book Cover (URL)</label>

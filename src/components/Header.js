@@ -11,10 +11,6 @@ import withAddPopup from "./popups/withAddPopup";
 import withRegisterPopup from "./popups/withRegisterPopup";
 import withLoginPopup from './popups/withLoginPopup';
 
-const activeStyle = {
-	transform: "translateX(0)"
-}
-
 const Header = () => {
 	const [isOpen, setOpen] = useState(false);
 
@@ -86,7 +82,7 @@ const Header = () => {
 						}}>
 						<CSSTransition
 							in={isOpen} 
-							timeout={5000} 
+							timeout={400} 
 							classNames="slide">
 								<div className="menu-main"
 									style={{transform: "translateX(0)"}}
@@ -104,18 +100,12 @@ const Header = () => {
 											}}
 											to="/" end 
 											className="menu-item"
-											style={({ isActive }) =>
-												isActive ? activeStyle : undefined
-											}
 											id="books">
 											My books
 										</NavLink>
 
 										<NavLink 
 											to="quotes" end 
-											className={({ isActive }) =>
-												isActive ? activeStyle : undefined
-											}
 											id="quotes"
 											onClick={(e) => {
 												e.stopPropagation()
@@ -129,10 +119,7 @@ const Header = () => {
 												e.stopPropagation()
 												setOpen(false)
 											}}
-											to="stats" end 
-											className={({ isActive }) =>
-												isActive ? activeStyle : undefined
-											}
+											to="stats" end
 											id="stats-menu">
 											My stats
 										</NavLink>
@@ -154,4 +141,3 @@ const Header = () => {
 }
 
 export default Header;
-

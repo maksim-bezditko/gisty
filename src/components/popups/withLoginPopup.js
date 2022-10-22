@@ -2,6 +2,7 @@ import withPopup from "../withPopup";
 import "./form.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { loginEmailPassword } from "../..";
 
 const withLoginPopup = (trigger) => () => {
 	const PopupHOC = withPopup(trigger);
@@ -20,11 +21,9 @@ const withLoginPopup = (trigger) => () => {
 						.required('Required')
 				})}
 				onSubmit={(values, { setSubmitting, resetForm }) => {
-					setTimeout(() => {
-						setSubmitting(false);
-						resetForm()
-						alert(JSON.stringify(values, null, 2));
-					}, 400);
+					loginEmailPassword(values)
+					setSubmitting(false);
+					resetForm();
 				}}
 				validateOnChange
 				validateOnBlur>
