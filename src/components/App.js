@@ -27,12 +27,12 @@ function App() {
             <Header authed={isLoggedin}/>
 
             <Routes>
-                <Route path="/quotes" element={<div className='route-wrapper'><Quotes/></div>}/>
-                <Route path="/stats" element={<div className='route-wrapper'><Stats/></div>}/>
                 <Route path="/" element={<Navigate to="/books"/>}/>
                 <Route path="/books" element={<div className='route-wrapper'><Books/></div>}/>
                 <Route path="/books/:bookId" element={<SingleBook></SingleBook>}/>
+                <Route path="/quotes" element={<div className='route-wrapper'><Quotes/></div>}/>
                 <Route path="/quotes/:quoteId" element={<SingleQuote></SingleQuote>}/>
+                <Route path="/stats" element={<div className='route-wrapper'><Stats/></div>}/>
                 <Route path="/settings" element={<Settings></Settings>}/>
             </Routes>
           </main>

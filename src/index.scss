@@ -36,17 +36,7 @@ code {
 }
 
 .page-wrapper {
-  display: flex;
-	justify-content: space-around;
-	flex-direction: row;
-	// border: 1px solid #000;
-	row-gap: 20px;
-	column-gap: 15px;
-	flex-wrap: wrap;
-	margin: 0;
 	padding: 20px;
-	// background-image: url("../assets/pattern.webp");
-	// background-size: 10px 10px;
 	@media (max-width: 555px) {
 		justify-content: space-between;
 	}
