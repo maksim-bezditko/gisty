@@ -2,7 +2,19 @@ import withPopup from "../withPopup";
 import "./form.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { createUser } from "../../index";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../index";
+import { updateProfile } from "firebase/auth";
+
+const format = (str) => {
+	let arr = [];
+
+	str.split(" ").forEach((publication, index) => {
+		arr.push(publication[0].toUpperCase() + publication.substring(1))
+	})
+
+	return arr.join(" ")
+}
 
 const withRegisterPopup = (trigger) => () => {
 	const PopupHOC = withPopup(trigger);
@@ -26,8 +38,23 @@ const withRegisterPopup = (trigger) => () => {
 						.min(1, "One letter can't be a name")
 						.required("Lastname required")
 				})}
-				onSubmit={(values, { setSubmitting, resetForm }) => {
-					createUser(values)
+				onSubmit={async (values, { setSubmitting, resetForm }) => {
+					const { email, password, name, lastName } = values;
+					try {
+						const response = await createUserWithEmailAndPassword(auth, email, password);
+
+						const fullName = name.trim() + " " + lastName.trim();
+
+						try {
+							await updateProfile(response.user, { displayName: format(fullName)})
+						} catch (e) {
+							alert("Sorry, something came up, try agaain or later.")
+						}
+						
+						console.log(response)
+					} catch (e) {
+						alert("Sorry, something came up, try agaain or later.")
+					}
 					setSubmitting(false);
 					resetForm()
 				}}

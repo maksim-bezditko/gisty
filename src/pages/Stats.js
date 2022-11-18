@@ -1,5 +1,9 @@
 const Stats = () => {
-	return "stats page"
+	return (
+		<div className="page-wrapper">
+			Stats Page
+		</div>
+	);
 }
 
 export default Stats;

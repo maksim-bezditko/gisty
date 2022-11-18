@@ -4,14 +4,15 @@ import { NavLink } from 'react-router-dom';
 import { useCallback, useEffect, useState } from "react";
 import { Fade as Hamburger} from "hamburger-react";
 import { CSSTransition } from "react-transition-group";
-
-// Higher-order components to create popups passing trigger argument
+import { signOut } from "firebase/auth";
+import { auth } from "..";
 
 import withAddPopup from "./popups/withAddPopup";
 import withRegisterPopup from "./popups/withRegisterPopup";
 import withLoginPopup from './popups/withLoginPopup';
 
-const Header = () => {
+const Header = ({authed}) => {
+
 	const [isOpen, setOpen] = useState(false);
 
 	const handleClick = () => setOpen(prev => !prev);
@@ -47,7 +48,7 @@ const Header = () => {
 						<NavLink to="/" end><img src={gistyLogo} alt="company logo"/></NavLink>
 
 						<NavLink 
-							to="/" end 
+							to="/books" 
 							style={({ isActive }) => (
 								{color: isActive ? "#8950FC" : "#464E5F"}
 							)}
@@ -55,7 +56,7 @@ const Header = () => {
 								My books
 						</NavLink>
 						<NavLink 
-							to="/quotes" end 
+							to="/quotes" 
 							style={({ isActive }) => ({
 								color: isActive ? "#8950FC" : "#464E5F"
 							})}
@@ -66,8 +67,8 @@ const Header = () => {
 					</div>
 					<div className="button-group">
 						<AddPopup/>
-						<LoginPopup/>
-						<RegisterPopup/>
+						{authed ? <button className="button login-button" onClick={() => signOut(auth)}>Log out</button> : <LoginPopup/>}
+						{authed ? <p className="greeting-header">Hello, <span className="name">{auth.currentUser.displayName}</span></p> : <RegisterPopup/>}
 					</div>
 					
 					<div className="hamburger">
@@ -123,8 +124,8 @@ const Header = () => {
 											id="stats-menu">
 											My stats
 										</NavLink>
-										<LoginPopupMenu/>
-										<RegisterPopupMenu/>
+										{authed ? <p className="greeting">Logged in as <span className="name">{auth.currentUser.displayName}</span></p> : <LoginPopupMenu/>}
+										{authed ? null: <RegisterPopupMenu/>}
 								</div>
 						</CSSTransition>
 					</div>

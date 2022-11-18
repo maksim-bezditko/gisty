@@ -11,7 +11,6 @@ export const withPopup = (trigger) => ({children}) => {
 				className="modal-back"
 				trigger={trigger}
 				modal
-				lockScroll
 				closeOnDocumentClick
 				closeOnEscape
 				nested

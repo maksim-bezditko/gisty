@@ -54,7 +54,7 @@ a {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	@media (max-width: 675px) {
+	@media (max-width: 676px) {
 		display: none;
 	}
 }
@@ -171,7 +171,7 @@ a {
 	justify-content: flex-end;
 	align-items: center;
 	margin-left: 10px;
-	@media (min-width: 676px) {
+	@media (min-width: 677px) {
 		display: none;
 	}
 	@media (max-width: 325px) {
@@ -230,3 +230,18 @@ a {
 	opacity: 0;
 	transition: opacity 400ms;
  }
+.greeting {
+	max-width: 50px;
+	font-size: 12px;
+	margin-top: 100px;
+}
+
+.name {
+	color: #8950FC;
+}
+
+.greeting-header {
+	max-width: 50px;
+	font-size: 14px;
+	margin-left: 30px;
+}

@@ -12,13 +12,13 @@ textarea,
 button,
 select,
 a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(63, 41, 41, 0);
   color: black;
 }
 
 
 body {
-  background-color: #D5D9E2;
+  background-color: #bfbfbf9e;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
   -webkit-touch-callout: none;
@@ -33,4 +33,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.page-wrapper {
+  display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	// border: 1px solid #000;
+	row-gap: 20px;
+	column-gap: 15px;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 20px;
+	// background-image: url("../assets/pattern.webp");
+	// background-size: 10px 10px;
+	@media (max-width: 555px) {
+		justify-content: space-between;
+	}
+	@media (max-width: 593px) {
+		justify-content: center;
+	}
 }

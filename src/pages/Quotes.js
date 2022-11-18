@@ -1,5 +1,9 @@
 const Quotes = () => {
-	return "quotes page"
+	return (
+		<div className="page-wrapper">
+			Quotes Page
+		</div>
+	)
 }
 
 export default Quotes;

@@ -2,11 +2,17 @@ import withPopup from "../withPopup";
 import "./form.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { loginEmailPassword } from "../..";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { auth } from "../..";
+import { useEffect } from "react";
 
 const withLoginPopup = (trigger) => () => {
 	const PopupHOC = withPopup(trigger);
 
+	useEffect(() => {
+		setInterval(() => {console.log(auth)}, 10000)
+	})
 	return (
 		<PopupHOC>
 			<Formik
@@ -20,8 +26,15 @@ const withLoginPopup = (trigger) => () => {
 						.min(5, "Can't be less than five symbols")
 						.required('Required')
 				})}
-				onSubmit={(values, { setSubmitting, resetForm }) => {
-					loginEmailPassword(values)
+				onSubmit={async (values, { setSubmitting, resetForm }) => {
+					const { email, password } = values;
+
+					try {
+						await signInWithEmailAndPassword(auth, email, password);
+						
+					} catch (e) {
+						alert("Sorry, something came up, try agaain or later.")
+					}
 					setSubmitting(false);
 					resetForm();
 				}}
