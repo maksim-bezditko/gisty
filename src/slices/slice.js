@@ -1,9 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	currentSection: "stats",
-	auth: false,
-	user: null
+	modal: "none"
 }
 
 
@@ -11,17 +9,11 @@ const slice = createSlice({
 	name: "general",
 	initialState,
 	reducers: {
-		changeSection: (state, action) => {
-			state.currentSection = action.payload;
-		},
-		setAuth: (state, action) => {
-			state.auth = action.payload;
-		},
-		setUser: (state, action) => {
-			state.user = action.payload;
+		setModal: (state, action) => {
+			state.modal = action.payload;
 		}
 	}
 })
 
-export const { changeSection, setAuth, setUser } = slice.actions;
+export const { setModal } = slice.actions;
 export default slice.reducer;

@@ -1,16 +1,21 @@
-import withPopup from "../withPopup";
-import "./form.scss";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from 'react'
+import Modal from '../Modal';
+import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { db } from "../..";
-import { ref, set, push, update, child } from "firebase/database";
+import { auth } from '../..';
+import { db } from '../..';
+import { ref, update } from "firebase/database";
 import { v4 as uuidv4 } from 'uuid';
+import "./form.scss";
+import { useDispatch } from 'react-redux';
+import { setModal } from '../../slices/slice';
 
-const withAddPopup = (trigger)=> () => {
-	const PopupHOC = withPopup(trigger);
-	return (
-		<PopupHOC>
-			<Formik
+function AddModal({visible}) {
+	const dispatch = useDispatch();
+
+  return (
+	 <Modal visible={visible}>
+		<Formik
 				initialValues={{ bookUrl: '', title: '', status: 'read'}}
 				validationSchema={Yup.object({
 					bookUrl: Yup.string()
@@ -23,15 +28,10 @@ const withAddPopup = (trigger)=> () => {
 				onSubmit={(values, { resetForm, setSubmitting }) => {
 					const {bookUrl, title, status} = values;
 					const newId = uuidv4()
+					const uid = auth.currentUser.uid;
 					const fullDate = new Date();
 					const date = fullDate.getDate() + "-" + (fullDate.getMonth() + 1) + "-" + fullDate.getFullYear();
 					try {
-						// set(ref(db, 'data/books/' + newId), {
-						// 	id: newId,
-						// 	title: title,
-						// 	url: bookUrl,
-						// 	date: date
-						// })
 						const postData = {
 							id: newId,
 							title: title,
@@ -39,12 +39,11 @@ const withAddPopup = (trigger)=> () => {
 							date: date,
 							status: status
 						};
-						//  const newPostKey = push(child(ref(db), 'data/books')).key;
 
-						 const updates = {};
-						 updates['/data/books/' + newId] = postData;
-					  
-						 return update(ref(db), updates);
+						const updates = {};
+						updates[`/data/users/${uid}/books/` + newId] = postData;
+						dispatch(setModal("none"))
+						update(ref(db), updates);
 					} catch (e) {
 						alert(e)
 					}
@@ -79,8 +78,8 @@ const withAddPopup = (trigger)=> () => {
 			}	
 			
 			</Formik>
-		</PopupHOC>
-	)
+	 </Modal>
+  )
 }
 
-export default withAddPopup;
+export default AddModal

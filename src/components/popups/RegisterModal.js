@@ -1,10 +1,15 @@
-import withPopup from "../withPopup";
 import "./form.scss";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from 'react'
+import Modal from '../Modal';
+import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../index";
+import { auth } from '../..';
 import { updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { update, ref } from "firebase/database";
+import { db } from "../..";
+import { useDispatch } from "react-redux";
+import { setModal } from "../../slices/slice";
 
 const format = (str) => {
 	let arr = [];
@@ -16,11 +21,11 @@ const format = (str) => {
 	return arr.join(" ")
 }
 
-const withRegisterPopup = (trigger) => () => {
-	const PopupHOC = withPopup(trigger);
+const RegisterModal = ({visible}) => {
+	const dispatch = useDispatch();
 
 	return (
-		<PopupHOC>
+		<Modal visible={visible}>
 			<Formik
 				initialValues={{ email: '', password: '', name: '', lastName: '' }}
 				validationSchema={Yup.object({
@@ -42,19 +47,33 @@ const withRegisterPopup = (trigger) => () => {
 					const { email, password, name, lastName } = values;
 					try {
 						const response = await createUserWithEmailAndPassword(auth, email, password);
-
+						const userId = auth.currentUser.uid;
+						
 						const fullName = name.trim() + " " + lastName.trim();
 
 						try {
 							await updateProfile(response.user, { displayName: format(fullName)})
+
+							const postData = {
+								placeholder: "max"
+							};
+
+							console.log(postData, userId)
+		
+							const updates = {};
+							updates['data/users/' + userId] = postData;
+							
+							update(ref(db), updates);
+							
+							dispatch(setModal("none"))		
 						} catch (e) {
 							alert("Sorry, something came up, try agaain or later.")
 						}
-						
-						console.log(response)
 					} catch (e) {
 						alert("Sorry, something came up, try agaain or later.")
 					}
+					
+					
 					setSubmitting(false);
 					resetForm()
 				}}
@@ -95,17 +114,14 @@ const withRegisterPopup = (trigger) => () => {
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
 						</div>
-						<button disabled={isSubmitting} type="submit">Register!</button>
+						<button disabled={isSubmitting} type="submit" onClick={(e) => e.stopPropagation()}>Register!</button>
 						
 					</Form>
 			}	
 			
 			</Formik>
-		</PopupHOC>
+		</Modal>
 	)
 }
 
-export default withRegisterPopup;
-
-
-
+export default RegisterModal;

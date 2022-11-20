@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -45,6 +46,12 @@
   width: 100%;
 }
 
+.wrapper.modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
 .route-wrapper {
   padding: 0px 10px 0;
+  display: flex;
+  justify-content: flex-end;
 }

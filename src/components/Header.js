@@ -6,14 +6,20 @@ import { Fade as Hamburger} from "hamburger-react";
 import { CSSTransition } from "react-transition-group";
 import { signOut } from "firebase/auth";
 import { auth } from "..";
-
-import withAddPopup from "./popups/withAddPopup";
-import withRegisterPopup from "./popups/withRegisterPopup";
-import withLoginPopup from './popups/withLoginPopup';
+import AddModal from "./popups/AddModal";
+import LoginModal from "./popups/LoginModal";
+import RegisterModal from "./popups/RegisterModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../slices/slice";
+import { modalSelector } from "../selectors/sectionSelector";
 
 const Header = ({authed}) => {
 
 	const [isOpen, setOpen] = useState(false);
+
+	const modal = useSelector(modalSelector);
+
+	const dispatch = useDispatch()
 
 	const handleClick = () => setOpen(prev => !prev);
 
@@ -26,26 +32,27 @@ const Header = ({authed}) => {
 	useEffect(() => {
 		document.addEventListener("keyup", checkKeypress)
 
+		console.log(auth.currentUser)
+
 		return () => {
 			document.removeEventListener("keypress", checkKeypress)
 		}
 	})
 	
-	const AddPopup = withAddPopup(<button className="button add-button">Add a book</button>)
-	const AddPopupMenu = withAddPopup(<p className="menu-item margin">Add a book</p>)
-
-	const RegisterPopup = withRegisterPopup(<button className="button register-button">Register</button>)
-	const RegisterPopupMenu = withRegisterPopup(<p className="menu-item">Register</p>)
-
-	const LoginPopup = withLoginPopup(<button className="button login-button">Log in</button>)
-	const LoginPopupMenu = withLoginPopup(<p className="menu-item">Log in</p>)
-	
 
 	return (
+		<>
+			<LoginModal visible={modal === "login" ? true : false}/>
+			<AddModal visible={modal === "add" ? true : false}/>
+			<RegisterModal visible={modal === "register" ? true : false}/>
+
 			<header>
+
 				<div className="header-wrapper">
 					<div className="logo-and-nav">
-						<NavLink to="/" end><img src={gistyLogo} alt="company logo"/></NavLink>
+						<NavLink to="/books" end><img src={gistyLogo} alt="company logo"/></NavLink>
+
+						
 
 						<NavLink 
 							to="/books" 
@@ -66,9 +73,9 @@ const Header = ({authed}) => {
 
 					</div>
 					<div className="button-group">
-						<AddPopup/>
-						{authed ? <button className="button login-button" onClick={() => signOut(auth)}>Log out</button> : <LoginPopup/>}
-						{authed ? <p className="greeting-header">Hello, <span className="name">{auth.currentUser.displayName}</span></p> : <RegisterPopup/>}
+						<button className={`button add-button${authed ? "" : " hidden"}`} onClick={() => dispatch(setModal("add"))}>Add a book</button>
+						{authed ? <button className="button login-button" onClick={() => {signOut(auth); localStorage.setItem("auth", true)}}>Log out</button> : <button className="button login-button" onClick={() => dispatch(setModal("login"))}>Log in</button>}
+						{authed ? <p className="greeting-header">{auth.currentUser ? <div><span className="hello">Hello, </span><span className="name">{auth.currentUser.displayName}</span></div> : null}</p> : <button className="button register-button" onClick={() => dispatch(setModal("register"))}>Register</button>}
 					</div>
 					
 					<div className="hamburger">
@@ -92,7 +99,7 @@ const Header = ({authed}) => {
 										setOpen(true)
 									}}>
 
-										<AddPopupMenu/>
+										<p className="menu-item margin" onClick={() => dispatch(setModal("add"))}>Add a book</p>
 
 										<NavLink 
 											onClick={(e) => {
@@ -124,8 +131,8 @@ const Header = ({authed}) => {
 											id="stats-menu">
 											My stats
 										</NavLink>
-										{authed ? <p className="greeting">Logged in as <span className="name">{auth.currentUser.displayName}</span></p> : <LoginPopupMenu/>}
-										{authed ? null: <RegisterPopupMenu/>}
+										{authed ? <p className="greeting">Logged in as <span className="name">{auth.currentUser.displayName}</span></p> : <p className="menu-item" onClick={() => dispatch(setModal("login"))}>Log in</p>}
+										{authed ? null: <p className="menu-item" onClick={() => dispatch(setModal("register"))}>Register</p>}
 								</div>
 						</CSSTransition>
 					</div>
@@ -138,6 +145,8 @@ const Header = ({authed}) => {
 				
 
 			</header>
+
+		</>
 	)
 }
 

@@ -28,19 +28,24 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .page-wrapper {
 	padding: 20px;
-	@media (max-width: 555px) {
-		justify-content: space-between;
+  padding-top: 120px;
+  width: calc(100vw - 102px);
+  transform: translateX(10px);
+	@media (max-width: 950px) {
+		width: calc(100vw - 75px);
 	}
-	@media (max-width: 593px) {
-		justify-content: center;
+	@media (max-width: 750px) {
+		width: calc(100vw - 50px);
+	}
+	@media (max-width: 675px) {
+		width: 100%;
+    transform: translateX(0px);
 	}
 }
