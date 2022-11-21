@@ -64,7 +64,6 @@ const RegisterModal = ({visible}) => {
 							updates['data/users/' + userId] = postData;
 							
 							update(ref(db), updates);
-							
 							dispatch(setModal("none"))		
 						} catch (e) {
 							alert("Sorry, something came up, try agaain or later.")

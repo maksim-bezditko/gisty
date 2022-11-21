@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	modal: "none"
+	modal: "none",
+	menu: false
 }
 
 
@@ -11,9 +12,12 @@ const slice = createSlice({
 	reducers: {
 		setModal: (state, action) => {
 			state.modal = action.payload;
+		},
+		setMenu: (state, action) => {
+			state.menu = action.payload
 		}
 	}
 })
 
-export const { setModal } = slice.actions;
+export const { setModal, setMenu } = slice.actions;
 export default slice.reducer;

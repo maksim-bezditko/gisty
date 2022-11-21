@@ -20,7 +20,7 @@ function AddModal({visible}) {
 				validationSchema={Yup.object({
 					bookUrl: Yup.string()
 						.required('Required')
-						.matches(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/, "Invalid URL"),
+						.matches(/([a-z\-_0-9/:.]*\.(jpg|jpeg|png|gif))/i, "Invalid URL"),
 					title: Yup.string()
 						.min(5, "Can't be less than five symbols")
 						.required('Required')

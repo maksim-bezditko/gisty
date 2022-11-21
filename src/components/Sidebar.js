@@ -12,6 +12,8 @@ const activeStyle = {
 const Sidebar = () => {
 	const dispatch = useDispatch();
 
+	const loggedIn = localStorage.getItem("auth") === "true";
+
 	return (
 		<aside>
       	<NavLink to="/books">
@@ -51,7 +53,7 @@ const Sidebar = () => {
               isActive ? activeStyle : undefined
             } 
 				to="quotes"
-				className="icon quotes">
+				className={`icon quotes${auth.currentUser ? "" : " hidden"}`}>
 
 				<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M17.1984 2.12871H11.3373V1.28789C11.3373 0.824414 10.9641 0.451172 10.5006 0.451172C10.0371 0.451172 9.66387 0.824414 9.66387 1.28789V2.12871H3.80273C2.6502 2.12871 1.71094 3.06797 1.71094 4.22051V18.4529C1.71094 19.6055 2.6502 20.5447 3.80273 20.5447H17.2025C18.3551 20.5447 19.2943 19.6055 19.2943 18.4529V4.22051C19.2943 3.06797 18.3551 2.12871 17.1984 2.12871ZM14.4832 3.80215L13.6998 5.82422H7.30137L6.51797 3.80215H14.4832ZM17.6168 18.457C17.6168 18.6867 17.4281 18.8754 17.1984 18.8754H3.80273C3.57305 18.8754 3.38437 18.6867 3.38437 18.457V4.22461C3.38437 3.99492 3.57305 3.80625 3.80273 3.80625H4.72148L5.94375 6.96855C6.0668 7.29258 6.37852 7.50586 6.72305 7.50586H14.274C14.6186 7.50586 14.9303 7.29258 15.0533 6.96855L16.2756 3.80625H17.1943C17.424 3.80625 17.6127 3.99492 17.6127 4.22461V18.457H17.6168Z" fill="#EEE5FF"/>
@@ -65,7 +67,7 @@ const Sidebar = () => {
 				isActive ? activeStyle : undefined
 				} 
 				to="stats"
-				className="icon stats">
+				className={`icon quotes${auth.currentUser ? "" : " hidden"}`}>
 
 					<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect opacity="0.3" x="16.1606" y="4.91248" width="3.72942" height="19.6499" rx="1.86471" fill="white"/>
@@ -80,7 +82,7 @@ const Sidebar = () => {
 				isActive ? {backgroundColor: "#2C9AFF"} : undefined
 				} 
 				to="settings"
-				className="icon stats">
+				className={`icon stats${auth.currentUser ? "" : " hidden"}`}>
 					<div className="icon settings">
 						<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clipPath="url(#clip0_3136_3442)">

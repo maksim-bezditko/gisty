@@ -1,4 +1,5 @@
 import "./Book.scss";
+import { Link, Navigate } from "react-router-dom";
 
 const statusCheck = {
 	reading: "🟢",
@@ -15,7 +16,7 @@ export const Book = ({id, title, link, date, status}) => {
 
 	return (
 		<>
-			<div className="book-wrapper">
+			<Link to={`/books/${id}`} className="book-wrapper" onClick={<Navigate to={`/books/${id}`}/>}>
 				<div className="image">
 					<img src={link} alt="bookCover" className="bookCover"/>
 				</div>
@@ -28,7 +29,7 @@ export const Book = ({id, title, link, date, status}) => {
 						<div className="date">{createdDate.toDateString().slice(3)}</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 		</>	
 	)
 }

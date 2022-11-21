@@ -63,9 +63,13 @@ a {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	@media (max-width: 676px) {
-		display: none;
-	}
+	// @media (max-width: 676px) {
+	// 	display: none;
+	// }
+}
+
+.button-group.hidden {
+	display: none;
 }
 
 .nav-item {
@@ -81,10 +85,14 @@ a {
 	display: grid;
 	place-items: center;
 	cursor: pointer;
-	transition: all 0.2s;
+	transition: opacity 0.3s, transform 0.2s;
+	&.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
 	&:hover {
 		transform: scale(1.1);
-		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.279);
+		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.279);
 	}
 	@media (max-width: 940px) {
 		width: 100px;
@@ -183,9 +191,6 @@ a {
 	justify-content: flex-end;
 	align-items: center;
 	margin-left: 10px;
-	@media (min-width: 677px) {
-		display: none;
-	}
 	@media (max-width: 325px) {
 		margin: 0;
 	}
@@ -245,7 +250,7 @@ a {
 .greeting {
 	max-width: 50px;
 	font-size: 12px;
-	margin-top: 100px;
+	margin-top: 20px;
 }
 
 .name {
@@ -256,9 +261,15 @@ a {
 	max-width: 50px;
 	font-size: 14px;
 	margin-left: 30px;
+	transition: all 0.3s;
+	min-width: 50px;
 }
 
 .add-button.hidden {
 	opacity: 0;
 	pointer-events: none;
+}
+
+.logout-menu {
+	margin-top: 40px;
 }
