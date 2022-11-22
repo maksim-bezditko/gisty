@@ -52,7 +52,7 @@ function App() {
           <Sidebar/>
           <main>
             <Header authed={user}/> 
-            <div className='route-wrapper'>            
+            <div className='page-wrapper'>            
               {user
                 ? 
                 <Routes>

@@ -17,6 +17,7 @@ import Menu from "./Menu";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { setMenu } from "../slices/slice";
 import { menuSelector } from "../selectors/sectionSelector";
+import AddQuoteModal from './popups/AddQuoteModal';
 
 const Header = () => {
 
@@ -90,11 +91,12 @@ const Header = () => {
       <LoginModal visible={modal === "login" ? true : false} />
       <AddModal visible={modal === "add" ? true : false} />
       <RegisterModal visible={modal === "register" ? true : false} />
+		<AddQuoteModal visible={modal === "add-quote" ? true : false} />
 
       <header>
         <div className="header-wrapper">
           <div className="logo-and-nav">
-            <NavLink to="/books" end>
+            <NavLink to={user ? "/books" : "about"} end>
               <img src={gistyLogo} alt="company logo" />
             </NavLink>
 

@@ -1,6 +1,6 @@
 function Settings() {
   return (
-	<div className="page-wrapper">
+	<div className="">
 		Settings
 	</div>
   )

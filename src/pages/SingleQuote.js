@@ -5,7 +5,7 @@ function SingleQuote() {
 	const { quoteId } = useParams();
 
   return (
-		<div className="page-wrapper">
+		<div className="">
 			Single Quote {quoteId}
 		</div>
   );

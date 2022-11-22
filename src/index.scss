@@ -28,24 +28,9 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
-.page-wrapper {
-	padding: 20px;
-  padding-top: 120px;
-  width: calc(100vw - 102px);
-  transform: translateX(10px);
-	@media (max-width: 950px) {
-		width: calc(100vw - 75px);
-	}
-	@media (max-width: 750px) {
-		width: calc(100vw - 50px);
-	}
-	@media (max-width: 675px) {
-		width: 100%;
-    transform: translateX(0px);
-	}
-}

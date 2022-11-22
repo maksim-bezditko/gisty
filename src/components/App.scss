@@ -51,9 +51,9 @@
   overflow-y: hidden;
 }
 .route-wrapper {
-  padding: 0px 10px 0;
+  padding: 0px 20px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 
@@ -67,4 +67,24 @@
   padding-top: 50px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.page-wrapper {
+	padding-top: 40px;
+  padding: 20px;
+  margin-top: 82px;
+  margin-left: 102px;
+	@media (max-width: 950px) {
+		margin-left: 75px;
+	}
+	@media (max-width: 750px) {
+		margin-left: 50px;
+	}
+	@media (max-width: 675px) {
+		margin-left: 0;
+    margin-top: 72px;
+	}
+  @media (max-width: 410px) {
+    margin-top: 60px;
+	}
 }

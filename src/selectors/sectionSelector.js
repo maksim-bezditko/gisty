@@ -14,3 +14,8 @@ export const menuSelector = createSelector(
 	state => state.general.menu,
 	menu => menu
 )
+
+export const booksSelector = createSelector(
+	state => state.general.books,
+	books => books
+)

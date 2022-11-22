@@ -5,7 +5,7 @@ function SingleBook() {
 	let { bookId } = useParams();
 
 	return (
-		<div className="page-wrapper">
+		<div className="">
 			Single Book {bookId}
 		</div>
 	)

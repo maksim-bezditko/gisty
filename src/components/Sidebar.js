@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import { setModal } from "../slices/slice";
 import { useDispatch } from "react-redux";
 import { auth } from "..";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const activeStyle = {
 	backgroundColor: "#3f4254c0"
@@ -11,12 +12,11 @@ const activeStyle = {
 
 const Sidebar = () => {
 	const dispatch = useDispatch();
-
-	const loggedIn = localStorage.getItem("auth") === "true";
+	const [user] = useAuthState(auth)
 
 	return (
 		<aside>
-      	<NavLink to="/books">
+      	<NavLink to={user ? "/books" : "about"}>
 				<img src={logo} className='logo' alt="logo"/>
 			</NavLink> 
 
@@ -33,7 +33,7 @@ const Sidebar = () => {
 				style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }
-				to="/books" 
+				to={user ? "/books" : "about"}
 				className="icon home">
 
 				<svg width="21" height="21" viewBox="0 0 21 21" fill="black" xmlns="http://www.w3.org/2000/svg">

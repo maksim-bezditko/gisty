@@ -138,3 +138,19 @@ label {
 .bookUrl {
 	font-style: italic;
 }
+
+.book-select {
+	border: 1px solid rgba(89, 89, 89, 0.589);
+	border-radius: 5px;
+	height: 30px;
+	font-size: 16px;
+	// padding: 10px 10px;
+	width: 100%;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: 500;
+	// font-style: italic;
+	@media (max-width: 450px) {
+		height: 25px;
+		height: 30px;
+	}
+}
