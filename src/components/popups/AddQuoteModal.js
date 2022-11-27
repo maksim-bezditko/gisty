@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import Modal from '../Modal';
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -10,11 +10,20 @@ import "./form.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../../slices/slice';
 import { booksSelector } from '../../selectors/sectionSelector';
+import { useList } from 'react-firebase-hooks/database';
 
 function AddQuoteModal({visible}) {
+	const uid = auth.currentUser.uid;
 	const dispatch = useDispatch();
-	const books = useSelector(booksSelector)
+	const [snapshots] = useList(ref(db, `data/users/${uid}/books`));
+	const books = useMemo(() => {
+		let arr = [];
+		for (let i of snapshots) {
+			arr.push(i.val())
+		}
+		return arr
 
+	}, [snapshots]) 
   	return (
 	 <Modal visible={visible}>
 		<Formik
@@ -27,20 +36,22 @@ function AddQuoteModal({visible}) {
 				})}
 				onSubmit={(values, { resetForm, setSubmitting }) => {
 					const {quote, book} = values;
+					const [bookTitle, bookId] = book.split("%")
 					const newId = uuidv4()
 					const uid = auth.currentUser.uid;
-					const fullDate = new Date();
-					const date = fullDate.getDate() + "-" + (fullDate.getMonth() + 1) + "-" + fullDate.getFullYear();
+					const timestamp = +new Date();
 					try {
 						const postData = {
-							book,
+							book: bookTitle,
+							addedFrom: bookId,
 							quote,
 							id: newId,
-							date
+							timestamp
 						};
 
 						const updates = {};
-						updates[`/data/users/${uid}/quotes/` + newId] = postData;
+						updates[`/data/users/${uid}/books/${bookId}/quotes/${newId}`] = postData;
+						updates[`/data/users/${uid}/quotes/${newId}`] = postData;
 						update(ref(db), updates);
 						dispatch(setModal("none"))
 					} catch (e) {
@@ -57,7 +68,7 @@ function AddQuoteModal({visible}) {
 
 						<div className="group">
 							<label htmlFor="quote">Quote</label>
-							<Field name="quote" type="text" />
+							<Field name="quote" type="text" className="input"/>
 							<ErrorMessage name="quote">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
@@ -68,15 +79,13 @@ function AddQuoteModal({visible}) {
 							<Field name="book" type="text" as="select" className="book-select">
 								<option style={{display: "none"}} value="">Select a book</option>
 								{books.map(item => {
-									return <option key={item.id} value={item.title}>{item.title}</option>
+									return <option key={item.id} value={item.title + "%" + item.id}>{item.title}</option>
 								})}
 							</Field>
 							<ErrorMessage name="book">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
 						</div>
-
-
 
 						<button disabled={isSubmitting} type="submit">Add one!</button>
 						

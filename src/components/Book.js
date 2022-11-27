@@ -1,18 +1,9 @@
 import "./Book.scss";
 import { Link, Navigate } from "react-router-dom";
+import { statuses } from "./popups/AddModal";
 
-const statusCheck = {
-	reading: "🟢",
-	read: "✔️",
-	planning: "⌛"
-}
-
-export const Book = ({id, title, link, date, status}) => {
-	const [day, month, year] = date.split("-");
-	console.log(day, month, year)
-
-	const createdDate = new Date(+year, +month - 1, +day);
-	console.log(createdDate)
+export const Book = ({id, title, link, timestamp, status}) => {
+	const createdDate = new Date(timestamp);
 
 	return (
 		<>
@@ -25,7 +16,7 @@ export const Book = ({id, title, link, date, status}) => {
 					<div className="title">{title}</div>
 
 					<div className="additional">
-						<div className="status">{statusCheck[status]} {status}</div>
+						<div className="status">{statuses[status]} {status.toLowerCase()}</div>
 						<div className="date">{createdDate.toDateString().slice(3)}</div>
 					</div>
 				</div>

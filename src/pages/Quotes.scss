@@ -21,6 +21,7 @@
 }
 
 .add-quote-button {
+	margin-top: 10px;
 	background-color: #0e2a45;
 	opacity: 1;
 	min-width: 100px;
@@ -29,12 +30,14 @@
 	@media (max-width: 780px) {
 		width: 80px;
 	}
+	margin-bottom: 30px;
 }
 
 .button-wrapper {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	
 }
 
 .sum-icon {

@@ -19,3 +19,22 @@ export const booksSelector = createSelector(
 	state => state.general.books,
 	books => books
 )
+
+export const bookToDeleteSelector = createSelector(
+	state => state.general.deleteId,
+	bookToDelete => bookToDelete
+)
+
+export const quotesSelector = createSelector(
+	state => state.general.books,
+	books => {
+		let arr = [];
+
+		for (let i of books) {
+			arr.concat(i?.quotes)
+		}
+		console.log(arr)
+
+		return arr;
+	}
+)

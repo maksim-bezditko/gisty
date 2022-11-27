@@ -10,13 +10,20 @@ import "./form.scss";
 import { useDispatch } from 'react-redux';
 import { setModal } from '../../slices/slice';
 
+export const statuses = {
+	Read: "✔️",
+	Reading: "🟢",
+	Planning: "📚",
+	Abandoned: "🟡"
+}
+
 function AddModal({visible}) {
 	const dispatch = useDispatch();
 
   return (
 	 <Modal visible={visible}>
 		<Formik
-				initialValues={{ bookUrl: '', title: '', status: 'read'}}
+				initialValues={{ bookUrl: '', title: '', status: ''}}
 				validationSchema={Yup.object({
 					bookUrl: Yup.string()
 						.required('Required')
@@ -29,19 +36,19 @@ function AddModal({visible}) {
 					const {bookUrl, title, status} = values;
 					const newId = uuidv4()
 					const uid = auth.currentUser.uid;
-					const fullDate = new Date();
-					const date = fullDate.getDate() + "-" + (fullDate.getMonth() + 1) + "-" + fullDate.getFullYear();
+					const id = title.split(" ").join("-").toLowerCase() + "-" + newId.slice(0, 3);
+					const timestamp = +new Date();
 					try {
 						const postData = {
-							id: newId,
-							title: title,
+							id,
+							title,
 							url: bookUrl,
-							date: date,
-							status: status
+							timestamp,
+							status
 						};
 
 						const updates = {};
-						updates[`/data/users/${uid}/books/` + newId] = postData;
+						updates[`/data/users/${uid}/books/` + id] = postData;
 						dispatch(setModal("none"))
 						update(ref(db), updates);
 					} catch (e) {
@@ -54,11 +61,11 @@ function AddModal({visible}) {
 				validateOnChange
 				validateOnBlur>
 				{({isSubmitting, isValid}) => 
-					<Form className="form">
+					<Form className="form" onClick={e => e.stopPropagation()}>
 						<h1>Wanna add a book?</h1>
 						<div className="group">
 							<label htmlFor="bookUrl">Book Cover (URL)</label>
-							<Field name="bookUrl" type="text" className='bookUrl' />
+							<Field name="bookUrl" type="text" className='bookUrl input' />
 							<ErrorMessage name="bookUrl">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
@@ -66,8 +73,21 @@ function AddModal({visible}) {
 
 						<div className="group">
 							<label htmlFor="title">Title</label>
-							<Field name="title" type="text" />
+							<Field name="title" type="text" className="input"/>
 							<ErrorMessage name="title">
+								{msg => <div className="error-message">{msg}</div>}	
+							</ErrorMessage>
+						</div>
+
+						<div className="group">
+							<label htmlFor="status">From</label>
+							<Field name="status" type="text" as="select" className="book-select">
+								<option style={{display: "none"}} value="">Select a stage</option>
+								{Object.keys(statuses).map(item => {
+									return <option value={item} key={item}>{item}</option>
+								})}
+							</Field>
+							<ErrorMessage name="book">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
 						</div>

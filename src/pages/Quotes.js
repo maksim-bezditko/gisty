@@ -10,6 +10,8 @@ import { useMemo, useContext, useLayoutEffect } from "react";
 import { authContext } from "../components/App";
 import { setBooks } from "../slices/slice";
 import { Dna } from "react-loader-spinner";
+import { sortListByDateDescending } from "../utils/sortFunctions";
+import { CSSTransition } from "react-transition-group";
 
 const Quotes = () => {
 	const uid = auth.currentUser?.uid;	
@@ -57,19 +59,30 @@ const Quotes = () => {
 	
 	return (
 		<div className="quotes">
-				{quotesList.map((item) => {
-					return <Quote key={item.id} book={item.book} id={item.id} date={item.date} quote={item.quote}/>
-				})}
-				<div className="button-wrapper">
-					<button
-						className='button add-quote-button'
-						onClick={() => dispatch(setModal("add-quote"))}
-						>
-						{/* <img className="sum-icon" src={sumIcon} alt="sumIcon"/> */}
-						Add a quote
-					</button>
-				</div>
-				
+			<div className="button-wrapper">
+				<button
+					className='button add-quote-button'
+					onClick={() => dispatch(setModal("add-quote"))}
+					>
+					{/* <img className="sum-icon" src={sumIcon} alt="sumIcon"/> */}
+					Add a quote
+				</button>
+			</div>
+			{quotesList.sort(sortListByDateDescending).map((item) => {
+				return (
+					<CSSTransition
+						mountOnEnter
+						unmountOnExit
+						key={item.id}
+						timeout={500}
+						classNames="quote"
+						in={true}
+						appear={true}
+				 >
+					<Quote book={item.book} id={item.id} timestamp={item.timestamp} quote={item.quote}/>
+				 </CSSTransition>
+				)
+			})}
 		</div>
 	)
 }

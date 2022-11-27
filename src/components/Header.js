@@ -18,6 +18,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { setMenu } from "../slices/slice";
 import { menuSelector } from "../selectors/sectionSelector";
 import AddQuoteModal from './popups/AddQuoteModal';
+import DeleteQuoteModal from "./popups/DeleteQuoteModal";
 
 const Header = () => {
 
@@ -92,6 +93,7 @@ const Header = () => {
       <AddModal visible={modal === "add" ? true : false} />
       <RegisterModal visible={modal === "register" ? true : false} />
 		<AddQuoteModal visible={modal === "add-quote" ? true : false} />
+		<DeleteQuoteModal visible={modal === "delete-quote" ? true : false} />
 
       <header>
         <div className="header-wrapper">

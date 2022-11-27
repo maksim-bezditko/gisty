@@ -1,13 +1,8 @@
 import "./Quote.scss";
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 
-
-function Quote({book, quote, id, date}) {
-	const [day, month, year] = date.split("-");
-	console.log(day, month, year)
-
-	const createdDate = new Date(+year, +month - 1, +day);
+function Quote({book, quote, id, timestamp}) {
+	const createdDate = new Date(timestamp);
 
   	return (
 		<div className="quote-wrapper"> 
@@ -19,9 +14,6 @@ function Quote({book, quote, id, date}) {
 					<div className="quote-info additional-item">
 						Added {createdDate.toDateString().slice(3)} from {book}
 					</div>
-					<cite className="quote-author additional-item">
-						— Ulrich Nielsen
-					</cite>
 				</div>
 			</div>
 	 	</div>

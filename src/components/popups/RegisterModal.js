@@ -55,7 +55,7 @@ const RegisterModal = ({visible}) => {
 							await updateProfile(response.user, { displayName: format(fullName)})
 
 							const postData = {
-								placeholder: "max"
+								fullName
 							};
 
 							console.log(postData, userId)
