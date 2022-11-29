@@ -13,8 +13,6 @@
 .quote {
 	// border: 1px solid rgb(97, 97, 97);
 	// margin-bottom: 100px;
-	
-	width: fit-content;
 	min-height: 50px;
 	padding: 20px;
 	min-width: 60%;
@@ -23,6 +21,12 @@
 .quote-text {
 	font-style: italic;
 	font-size: 18px;
+	width: fit-content;
+}
+.additional {
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .quote-author {
@@ -43,4 +47,13 @@
 	font-size: 14px;
 	font-weight: 200;
 	color: rgb(0, 111, 0);
+}
+
+.trash-icon {
+	width: 20px;
+	height: 20px;
+	color: gray;
+	&:hover {
+		color: rgb(249, 19, 46);
+	}
 }

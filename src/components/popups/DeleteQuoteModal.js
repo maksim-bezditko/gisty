@@ -46,22 +46,22 @@ function DeleteQuoteModal({visible}) {
   	return (
 		<Modal visible={visible}>
 			<div className='form confirm'>
-				<h1 className='confirm-question'>Are you sure?</h1>
+				<h1 className='confirm-question transition-none'>Are you sure?</h1>
 				
-				<div>
-					<input className='keep' id="keep" type="checkbox" name="keep" onClick={() => setChecked(!checked)} value={checked}/>
-					<label className="keep-label" htmlFor="keep">Keep related quotes</label>
+				<div className="keep-input transition-none">
+					<input className='keep transition-none' id="keep" type="checkbox" name="keep" onClick={() => setChecked(!checked)} value={checked}/>
+					<label className="keep-label transition-none" htmlFor="keep">Keep related quotes</label>
 				</div>
 
 				<div className='buttons'>
 					<button 
-						className={`button${modal === "delete-quote" ? " add-quote-button" : ""}`}
+						className={`button${modal === "delete-quote" ? " add-quote-button transition-none" : ""}`}
 						onClick={async () => {
 							dispatch(setModal(null))
 							try {
 								navigate("/")
 								await deleteBookById(bookToDelete)
-								if (checked) {
+								if (!checked) {
 									const postData = quotesList.filter(item => item.addedFrom !== bookToDelete)
 
 									const updates = {};
@@ -78,7 +78,7 @@ function DeleteQuoteModal({visible}) {
 						}}>
 						Yes
 					</button>
-					<button className={`button${modal === "delete-quote" ? " add-quote-button delete-quote-button" : ""}`}
+					<button className={`button${modal === "delete-quote" ? " add-quote-button delete-quote-button-1 transition-none" : ""}`}
 						onClick={() => {
 							dispatch(setModal(null))
 							dispatch(setDeleteId(null))

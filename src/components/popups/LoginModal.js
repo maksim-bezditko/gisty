@@ -40,13 +40,13 @@ function LoginModal({visible}) {
 			}}
 			validateOnChange
 			validateOnBlur>
-			{({isSubmitting, isValid}) => 
+			{({isSubmitting}) => 
 				<Form className="form">
 			
 					<h1>Login Form</h1>
 					<div className="group">
 						<label htmlFor="email">Email Address</label>
-						<Field name="email" type="text" />
+						<Field name="email" type="text" className="input"/>
 						<ErrorMessage name="email">
 							{msg => <div className="error-message">{msg}</div>}	
 						</ErrorMessage>
@@ -54,7 +54,7 @@ function LoginModal({visible}) {
 
 					<div className="group">
 						<label htmlFor="password">Password</label>
-						<Field name="password" type="password" />
+						<Field name="password" type="password" className="input"/>
 						<ErrorMessage name="password">
 							{msg => <div className="error-message">{msg}</div>}	
 						</ErrorMessage>

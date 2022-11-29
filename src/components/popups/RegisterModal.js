@@ -66,10 +66,10 @@ const RegisterModal = ({visible}) => {
 							update(ref(db), updates);
 							dispatch(setModal("none"))		
 						} catch (e) {
-							alert("Sorry, something came up, try agaain or later.")
+							alert("Sorry, something came up, try again or later.")
 						}
 					} catch (e) {
-						alert("Sorry, something came up, try agaain or later.")
+						alert("Sorry, something came up, try again or later.")
 					}
 					
 					
@@ -84,7 +84,7 @@ const RegisterModal = ({visible}) => {
 						<h1>Registration Form</h1>
 						<div className="group">
 							<label htmlFor="email">Email Address</label>
-							<Field name="email" type="text" />
+							<Field name="email" type="text" className="input"/>
 							<ErrorMessage name="email">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
@@ -92,7 +92,7 @@ const RegisterModal = ({visible}) => {
 
 						<div className="group">
 							<label htmlFor="name">Name</label>
-							<Field name="name" type="text" />
+							<Field name="name" type="text" className="input"/>
 							<ErrorMessage name="name">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
@@ -100,7 +100,7 @@ const RegisterModal = ({visible}) => {
 
 						<div className="group">
 							<label htmlFor="lastName">Lastname</label>
-							<Field name="lastName" type="text" />
+							<Field name="lastName" type="text" className="input"/>
 							<ErrorMessage name="lastName">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>
@@ -108,7 +108,7 @@ const RegisterModal = ({visible}) => {
 
 						<div className="group">
 							<label htmlFor="password">Password</label>
-							<Field name="password" type="password" />
+							<Field name="password" type="password" className="input"/>
 							<ErrorMessage name="password">
 								{msg => <div className="error-message">{msg}</div>}	
 							</ErrorMessage>

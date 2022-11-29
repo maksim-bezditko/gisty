@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { auth } from '..';
 import { useList } from 'react-firebase-hooks/database';
 import { ref } from 'firebase/database';
@@ -14,19 +14,21 @@ import { setDeleteId } from '../slices/slice';
 
 function SingleBook() {
 	let { id } = useParams();
-	const uid = auth.currentUser?.uid;	
-	console.log(id)
+	const uid = auth.currentUser?.uid;
 	const [snapshots, loading, error] = useList(ref(db, `data/users/${uid}/books`));
 	const dispatch = useDispatch();
-	
+	const navigate = useNavigate()
+
 	const book = useMemo(() => {
 		let arr = [];
 		for (let i of snapshots) {
 			arr.push(i.val())
 		}
-		return arr.find(item => item.id === id)
+		let item = arr.find(item => item.id === id);
+		if (item) return item;
+		navigate("/books")
 
-	}, [snapshots, id]) 
+	}, [snapshots, id, navigate]) 
 
 	const [quotesSnapshots] = useList(ref(db, `data/users/${uid}/quotes`));
 

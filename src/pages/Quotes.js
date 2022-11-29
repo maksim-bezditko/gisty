@@ -60,13 +60,15 @@ const Quotes = () => {
 	return (
 		<div className="quotes">
 			<div className="button-wrapper">
+				{ booksList.length === 0 && <p className="warning">In order to add a quote, add a book first</p>}
+				{ booksList.length !== 0 && 
 				<button
 					className='button add-quote-button'
 					onClick={() => dispatch(setModal("add-quote"))}
 					>
 					{/* <img className="sum-icon" src={sumIcon} alt="sumIcon"/> */}
 					Add a quote
-				</button>
+				</button> }
 			</div>
 			{quotesList.sort(sortListByDateDescending).map((item) => {
 				return (

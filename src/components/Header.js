@@ -90,10 +90,14 @@ const Header = () => {
 	return (
     <>
       <LoginModal visible={modal === "login" ? true : false} />
-      <AddModal visible={modal === "add" ? true : false} />
       <RegisterModal visible={modal === "register" ? true : false} />
-		<AddQuoteModal visible={modal === "add-quote" ? true : false} />
-		<DeleteQuoteModal visible={modal === "delete-quote" ? true : false} />
+      {auth.currentUser && (
+			<>
+				<AddModal visible={modal === "add" ? true : false} />
+				<AddQuoteModal visible={modal === "add-quote" ? true : false} />
+				<DeleteQuoteModal visible={modal === "delete-quote" ? true : false} />
+			</>
+		)}
 
       <header>
         <div className="header-wrapper">
