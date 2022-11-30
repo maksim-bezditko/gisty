@@ -1,21 +1,15 @@
-import React from 'react'
-import Modal from '../Modal';
-import { Field, Form, Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, {useState, useMemo} from 'react'
+import Modal from '../../HOCs/Modal/Modal';
 import { auth } from '../..';
 import { db } from '../..';
 import { ref, update, remove } from "firebase/database";
 import { useList } from 'react-firebase-hooks/database';
-import { v4 as uuidv4 } from 'uuid';
 import "./form.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../../slices/slice';
-import { booksSelector, modalSelector } from '../../selectors/sectionSelector';
-import { bookToDeleteSelector } from '../../selectors/sectionSelector';
+import { modalSelector, bookToDeleteSelector } from '../../selectors/selectors';
 import { useNavigate } from 'react-router-dom';
 import { setDeleteId } from '../../slices/slice';
-import { setBooks } from '../../slices/slice';
-import { useRef, useState, useMemo } from 'react';
 
 export const deleteBookById = (id) => {
 	const userId = auth.currentUser.uid;
@@ -29,7 +23,6 @@ function DeleteQuoteModal({visible}) {
 	const dispatch = useDispatch();
 	const bookToDelete = useSelector(bookToDeleteSelector);
 	const navigate = useNavigate()
-	const books = useSelector(booksSelector)
 	const [checked, setChecked] = useState(false)
 	const modal = useSelector(modalSelector)
 	const [quotesSnapshots] = useList(ref(db, `data/users/${uid}/quotes`));

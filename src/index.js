@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import App from "./components/App";
+import App from "./components/App/App";
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import store from "./store/store";

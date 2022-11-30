@@ -2,11 +2,11 @@ import "./Quote.scss";
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { auth, db } from "..";
+import { auth, db } from "../..";
 import { ref, remove, update } from "firebase/database";
 import { useMemo } from "react";
 import { useList } from "react-firebase-hooks/database";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 export const deleteQuoteById = (id) => {
 	const userId = auth.currentUser.uid;
@@ -19,7 +19,7 @@ function Quote({book, quote, id, timestamp}) {
 	const createdDate = new Date(timestamp);
 	const uid = auth.currentUser.uid;
 	const [quotesSnapshots] = useList(ref(db, `data/users/${uid}/quotes`));
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	const quotesList = useMemo(() => {
 		let arr = [];

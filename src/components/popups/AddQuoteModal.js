@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import Modal from '../Modal';
+import Modal from '../../HOCs/Modal/Modal';
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { auth } from '../..';
@@ -7,23 +7,15 @@ import { db } from '../..';
 import { ref, update } from "firebase/database";
 import { v4 as uuidv4 } from 'uuid';
 import "./form.scss";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setModal } from '../../slices/slice';
-import { booksSelector } from '../../selectors/sectionSelector';
-import { useList } from 'react-firebase-hooks/database';
+import useBookList from '../../hooks/useBookList';
 
 function AddQuoteModal({visible}) {
-	const uid = auth.currentUser.uid;
 	const dispatch = useDispatch();
-	const [snapshots] = useList(ref(db, `data/users/${uid}/books`));
-	const books = useMemo(() => {
-		let arr = [];
-		for (let i of snapshots) {
-			arr.push(i.val())
-		}
-		return arr
+	
+	const {books} = useBookList();
 
-	}, [snapshots]) 
   	return (
 	 <Modal visible={visible}>
 		<Formik
@@ -40,6 +32,7 @@ function AddQuoteModal({visible}) {
 					const newId = uuidv4()
 					const uid = auth.currentUser.uid;
 					const timestamp = +new Date();
+					
 					try {
 						const postData = {
 							book: bookTitle,
@@ -50,10 +43,14 @@ function AddQuoteModal({visible}) {
 						};
 
 						const updates = {};
+
 						updates[`/data/users/${uid}/books/${bookId}/quotes/${newId}`] = postData;
 						updates[`/data/users/${uid}/quotes/${newId}`] = postData;
+
 						update(ref(db), updates);
+
 						dispatch(setModal("none"))
+
 					} catch (e) {
 						alert(e)
 					}
@@ -88,10 +85,8 @@ function AddQuoteModal({visible}) {
 						</div>
 
 						<button disabled={isSubmitting} type="submit">Add one!</button>
-						
 					</Form>
 			}	
-			
 			</Formik>
 	 </Modal>
   )

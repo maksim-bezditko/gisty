@@ -1,29 +1,15 @@
-import './App.scss';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Books from '../pages/Books';
-import Quotes from '../pages/Quotes';
-import Stats from '../pages/Stats';
-import React, { useState } from 'react';
-import { auth } from '../index';
-import { onAuthStateChanged, setPersistence, browserLocalPersistence } from 'firebase/auth';
-import SingleBook from '../pages/SingleBook';
-import SingleQuote from '../pages/SingleQuote';
+import "./App.scss";
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { auth } from '../../index';
 import { Navigate } from 'react-router-dom';
-import Settings from '../pages/Settings';
-import { useEffect } from 'react';
-import { modalSelector } from '../selectors/sectionSelector';
-import { useSelector } from 'react-redux';
-import AddModal from './popups/AddModal';
-import LoginModal from './popups/LoginModal';
-import About from '../pages/About';
-import { publicRoutes, privateRoutes } from '../routes';
+import { publicRoutes, privateRoutes } from '../../routing/routes';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { ColorRing } from 'react-loader-spinner';
 
 export const authContext = React.createContext(null);
-
 
 function App() {
   const [user, loading, error] = useAuthState(auth);

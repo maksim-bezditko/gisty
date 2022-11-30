@@ -1,6 +1,6 @@
 import "./form.scss";
 import React from 'react'
-import Modal from '../Modal';
+import Modal from '../../HOCs/Modal/Modal';
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { auth } from '../..';

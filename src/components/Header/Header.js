@@ -1,24 +1,23 @@
 import "./Header.scss";
-import gistyLogo from "../assets/Gisty.png";
+import gistyLogo from "../../assets/Gisty.png";
 import { NavLink } from 'react-router-dom';
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { Fade as Hamburger} from "hamburger-react";
-import { CSSTransition } from "react-transition-group";
 import { signOut } from "firebase/auth";
-import { auth } from "..";
-import AddModal from "./popups/AddModal";
-import LoginModal from "./popups/LoginModal";
-import RegisterModal from "./popups/RegisterModal";
+import { auth } from "../..";
+import AddModal from "../Popups/AddModal";
+import LoginModal from "../Popups/LoginModal";
+import RegisterModal from "../Popups/RegisterModal";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../slices/slice";
-import { modalSelector } from "../selectors/sectionSelector";
-import { authContext } from "./App";
-import Menu from "./Menu";
-import { useWindowSize } from "../hooks/useWindowSize";
-import { setMenu } from "../slices/slice";
-import { menuSelector } from "../selectors/sectionSelector";
-import AddQuoteModal from './popups/AddQuoteModal';
-import DeleteQuoteModal from "./popups/DeleteQuoteModal";
+import { setModal } from "../../slices/slice";
+import { modalSelector } from "../../selectors/selectors";
+import { authContext } from "../App/App";
+import Menu from "../Menu/Menu";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { setMenu } from "../../slices/slice";
+import { menuSelector } from "../../selectors/selectors";
+import AddQuoteModal from '../Popups/AddQuoteModal';
+import DeleteQuoteModal from "../Popups/DeleteQuoteModal";
 
 const Header = () => {
 

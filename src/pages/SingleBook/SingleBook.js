@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { auth } from '..';
+import { auth } from '../..';
 import { useList } from 'react-firebase-hooks/database';
 import { ref } from 'firebase/database';
-import { db } from '..';
+import { db } from '../..';
 import { InfinitySpin } from 'react-loader-spinner';
 import "./SingleBook.scss";
-import { statuses } from '../components/popups/AddModal';
+import { statuses } from '../../components/Popups/AddModal';
 import { useDispatch } from 'react-redux';
-import { setModal } from '../slices/slice';
-import { setDeleteId } from '../slices/slice';
+import { setModal } from '../../slices/slice';
+import { setDeleteId } from '../../slices/slice';
 // import plus from "../assets/plus.svg";
 
 function SingleBook() {

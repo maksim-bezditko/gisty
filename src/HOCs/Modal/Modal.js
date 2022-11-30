@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import "./Modal.scss";
 import { useDispatch } from 'react-redux';
-import { setModal } from '../slices/slice';
+import { setModal } from '../../slices/slice';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { modalSelector } from '../selectors/sectionSelector';
+import { modalSelector } from '../../selectors/selectors';
 
 function Modal({visible, children}) {
 

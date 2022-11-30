@@ -1,6 +1,6 @@
 import "./Book.scss";
 import { Link, Navigate } from "react-router-dom";
-import { statuses } from "./popups/AddModal";
+import { statuses } from "../Popups/AddModal";
 
 export const Book = ({id, title, link, timestamp, status}) => {
 	const createdDate = new Date(timestamp);

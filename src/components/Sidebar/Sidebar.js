@@ -1,9 +1,9 @@
 import "./Sidebar.scss"
-import logo from "../assets/Logo.png";
+import logo from "../../assets/Logo.png";
 import { NavLink } from "react-router-dom"
-import { setModal } from "../slices/slice";
+import { setModal } from "../../slices/slice";
 import { useDispatch } from "react-redux";
-import { auth } from "..";
+import { auth } from "../..";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const activeStyle = {

@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import { authContext } from "./App";
+import { authContext } from "../App/App";
 import { CSSTransition } from "react-transition-group";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "./Header.scss";
-import { auth } from "..";
+import "./Menu.scss"
+import { auth } from "../..";
 import { signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
-import { menuSelector } from "../selectors/sectionSelector";
-import { setModal } from "../slices/slice";
-import { setMenu } from "../slices/slice";
+import { menuSelector } from "../../selectors/selectors";
+import { setModal } from "../../slices/slice";
+import { setMenu } from "../../slices/slice";
 
 const Menu = () => {
 	const user = useContext(authContext)
@@ -22,7 +22,6 @@ const Menu = () => {
             style={{ display: menu ? "block" : "none" }}
             onClick={() => {
               dispatch(setMenu(false));
-				// handleClick()
             }}
           >
             <CSSTransition in={menu} timeout={400} classNames="slide">
