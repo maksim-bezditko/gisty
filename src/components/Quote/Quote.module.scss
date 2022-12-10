@@ -1,0 +1,59 @@
+.quoteWrapper {
+	background-color: rgb(237, 237, 237);
+	width: 100%;
+	margin-bottom: 20px;
+	box-shadow: 0px 10px 5px rgba(93, 90, 90, 0.381);
+	border-radius: 15px;
+	transition: all 0.3s linear;
+	cursor: pointer;
+	&:hover {
+		box-shadow: 0px 10px 20px rgba(93, 90, 90, 0.629);
+	}
+}
+
+.quote {
+	min-height: 50px;
+	padding: 20px;
+	min-width: 60%;
+}
+
+.quoteText {
+	font-style: italic;
+	font-size: 18px;
+	width: fit-content;
+}
+.additional {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.quoteAuthor {
+	margin-top: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.additionalItem {
+	width: 50%;
+	display: flex;
+	align-items: center;
+}
+
+.quoteInfo {
+	font-size: 14px;
+	font-weight: 200;
+	color: rgb(0, 111, 0);
+}
+
+.trashIcon {
+	width: 20px;
+	height: 20px;
+	color: gray;
+	transition: all 0.3s;
+	&:hover {
+		color: rgb(249, 19, 46);
+	}
+}
